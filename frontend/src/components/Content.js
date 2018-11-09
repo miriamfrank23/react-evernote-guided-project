@@ -10,12 +10,15 @@ import Instructions from './Instructions';
           Then complete the rest of your app before attempting to
           refactor to get this Content component to work.
 */
+
 class Content extends Component {
   renderContent = () => {
-    if (false) {
-      return <NoteEditor />;
-    } else if (false) {
-      return <NoteViewer />;
+    if (this.props.noteToEdit) {
+      return <NoteEditor noteToEdit={this.props.noteToEdit}
+      addEditedNote={this.props.addEditedNote}removeEditedNote={this.props.removeEditedNote}/>;
+    } else if (this.props.currentNote) {
+      return <NoteViewer currentNote={this.props.currentNote}
+      selectNoteToEdit={this.props.selectNoteToEdit}/>;
     } else {
       return <Instructions />;
     }

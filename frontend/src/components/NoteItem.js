@@ -1,10 +1,12 @@
 import React from 'react';
 
 const NoteList = (props) => (
-  <li>
-    <h2>Title</h2>
-    <p>Caption...</p>
-  </li>
+  <div onClick={() => {props.selectCurrentNote(props.note); props.removeEditedNote()}}>
+    <li>
+      <h2>{props.note.title}</h2>
+      <p>{`${props.note.body.substring(0,20)}...`}</p>
+    </li>
+  </div>
 );
 
 export default NoteList;
