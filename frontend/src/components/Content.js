@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import NoteEditor from './NoteEditor';
-import NoteViewer from './NoteViewer';
-import Instructions from './Instructions';
+import React, { Component } from "react";
+import NoteEditor from "./NoteEditor";
+import NoteViewer from "./NoteViewer";
+import Instructions from "./Instructions";
 
 /*
   Advice: If you cannot figure out how to get this component to work,
@@ -12,22 +12,30 @@ import Instructions from './Instructions';
 */
 
 class Content extends Component {
-  renderContent = () => {
-    if (this.props.noteToEdit) {
-      return <NoteEditor noteToEdit={this.props.noteToEdit}
-      addEditedNote={this.props.addEditedNote}removeEditedNote={this.props.removeEditedNote}/>;
-    } else if (this.props.currentNote) {
-      return <NoteViewer currentNote={this.props.currentNote}
-      selectNoteToEdit={this.props.selectNoteToEdit}/>;
-    } else {
-      return <Instructions />;
-    }
-  }
+  renderNoteEditor = () => (
+    <NoteEditor
+      noteToEdit={this.props.noteToEdit}
+      addEditedNote={this.props.addEditedNote}
+      removeEditedNote={this.props.removeEditedNote}
+    />
+  );
+
+  renderNoteViewer = () => (
+    <NoteViewer
+      currentNote={this.props.currentNote}
+      selectNoteToEdit={this.props.selectNoteToEdit}
+      handleEditRequest={this.props.handleEditRequest}
+    />
+  );
+
+  renderNote = () => {
+    this.props.editNote ? this.renderNoteEditor() : this.renderNoteViewer();
+  };
 
   render() {
     return (
-      <div className='master-detail-element detail'>
-        {this.renderContent()}
+      <div className="master-detail-element detail">
+        {this.props.currentNote ? this.renderNote() : <Instructions />}
       </div>
     );
   }
